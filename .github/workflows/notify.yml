@@ -1,0 +1,25 @@
+name: Notify TC of new incidents
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  notify_tc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.10
+      - run: pip install requests
+
+      - name: Get incident ID
+        run: echo ${{ github.event.issue.number }} >> incident_id.txt
+
+      - name: Send notification to TC
+        run: python send_notification.py ${{ github.event.issue.number }}
+
+      - name: Delete incident ID file
+        run: rm -f incident_id.txt
