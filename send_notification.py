@@ -6,7 +6,7 @@ def send_notification(incident_id):
   # Replace this with your preferred method of sending a notification
   # For example, you could use this to send an email to the TC members:
   #
-   requests.post("https://api.email-service.com/send-email",
+  requests.post("https://api.email-service.com/send-email",
                 json={"to": ["ejiro.laureld@gmail.com"], "subject": "New incident opened", "body": "Incident ID: {}".format(incident_id)})
 
   # Or, you could use this to post a message to a Slack channel:
